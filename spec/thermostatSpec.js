@@ -20,4 +20,9 @@ describe('thermostat', function(){
     thermostat.decreaseTemp();
     expect(thermostat.temp).toEqual(19);
   });
+
+  it('has a minimum temp of 10 degrees', function() {
+    thermostat.temp = 10
+    expect(function(){ thermostat.decreaseTemp(); }).toThrowError('this is already the min temp');
+  });
 });
