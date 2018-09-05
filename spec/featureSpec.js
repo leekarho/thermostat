@@ -15,4 +15,9 @@ describe('feature test', function(){
     thermostat.increaseTemp();
     expect(thermostat.temp).toEqual(21)
   });
+
+  it('decreases by 1 degree', function(){
+    thermostat.decreaseTemp();
+    expect(thermostat.temp).toEqual(19);
+  });
 });
