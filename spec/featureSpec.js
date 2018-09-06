@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 describe('feature test', function(){
   var thermostat
@@ -20,4 +20,5 @@ describe('feature test', function(){
     thermostat.decreaseTemp();
     expect(thermostat.temp).toEqual(19);
   });
+
 });

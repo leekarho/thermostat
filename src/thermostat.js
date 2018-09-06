@@ -1,37 +1,49 @@
+'use strict';
+
 function Thermostat(){
-  this.temp = DEFAULT_TEMP;
-  this.isPowerSaving = true;
+  this.DEFAULT_TEMP = 20;
+  this.MIN_TEMP = 10;
+  this.MAX_PSM_OFF = 32;
+  this.MAX_PSM_ON = 25;
+  this.temp = this.DEFAULT_TEMP;
+  this.powerSavingMode = true;
 }
 
-const DEFAULT_TEMP = 20;
-const MIN_TEMP = 10;
-const MAX_TEMP = 32;
-const MAX_POWER_SAVING_TEMP = 25;
-
-
 Thermostat.prototype.increaseTemp = function () {
-  if((this.isPowerSaving) && (this.temp === MAX_POWER_SAVING_TEMP)) {
-    throw new Error('power saving on 25 degrees is the max temp');
+  if (this.isMaximumTemperature()) {
+    return;
   }
-  else if(this.temp === MAX_TEMP) {
-    throw new Error('this is the max temp');
-  }
-  return this.temp += 1;
+    this.temp += 1;
 };
 
 Thermostat.prototype.decreaseTemp = function () {
-  if(this.temp === MIN_TEMP) {
-    throw new Error('this is already the min temp');
+  if(this.temp === this.MIN_TEMP) {
+    return;
   }
   return this.temp -= 1;
 };
 
-// Thermostat.prototype.powerSavingOff = function (){
-//   return this.isPowerSaving = false
-// };
+Thermostat.prototype.isMaximumTemperature = function() {
+  if (this.isPowerSavingModeOn() === false) {
+    return this.temp === this.MAX_PSM_OFF;
+  }
+    return this.temp === this.MAX_PSM_ON;
+}
+
+Thermostat.prototype.isPowerSavingModeOn = function () {
+  return this.powerSavingMode === true;
+};
+
+Thermostat.prototype.switchPowerSavingModeOff = function() {
+  this.powerSavingMode = false;
+};
+
+Thermostat.prototype.switchPowerSavingModeOn = function() {
+  this.powerSavingMode = true;
+};
 
 Thermostat.prototype.reset = function() {
-  return this.temp = DEFAULT_TEMP;
+  return this.temp = this.DEFAULT_TEMP;
 };
 
 Thermostat.prototype.energyUsage = function(temp) {

@@ -23,19 +23,37 @@ describe('thermostat', function(){
 
   it('has a minimum temp of 10 degrees', function() {
     thermostat.temp = 10;
-    expect(function(){ thermostat.decreaseTemp(); }).toThrowError('this is already the min temp');
+    expect(thermostat.temp).toEqual(10);
+  });
+
+  it('has power saving mode on by default', function() {
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
+  });
+
+  it('can switch PSM off', function() {
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+  });
+
+  it('can switch PSM back on', function() {
+    thermostat.switchPowerSavingModeOff();
+    expect(thermostat.isPowerSavingModeOn()).toBe(false);
+    thermostat.switchPowerSavingModeOn();
+    expect(thermostat.isPowerSavingModeOn()).toBe(true);
   });
 
   it('has a max temp of 25 if power saving mode is on', function(){
     thermostat.temp = 25;
-    spyOn(thermostat,'isPowerSaving').and.returnValue(true);
-    expect(function(){ thermostat.increaseTemp(); }).toThrowError('power saving on 25 degrees is the max temp');
+    thermostat.switchPowerSavingModeOn();
+    thermostat.increaseTemp();
+    expect(thermostat.temp).toEqual(25);
   });
 
   it('has a max temp of 32 degrees if power saving mode is off', function(){
     thermostat.temp = 32;
-  //  spyOn(thermostat,'isPowerSaving').and.returnValue(false);
-    expect(function(){ thermostat.increaseTemp(); }).toThrowError('this is the max temp') ;
+    thermostat.switchPowerSavingModeOff();
+    thermostat.increaseTemp();
+    expect(thermostat.temp).toEqual(32);
   });
 
   it('has a temp of 20 degrees if reset option chosen', function(){
