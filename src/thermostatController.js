@@ -1,7 +1,7 @@
 $( document ).ready(function(){
 
   var thermostat = new Thermostat();
-  document.getElementById("display").innerHTML = thermostat.temp
+  $("#display").text(thermostat.temp);
 
   $( "#up" ).click(function( event ) {
     $('#display').text(thermostat.increaseTemp());
