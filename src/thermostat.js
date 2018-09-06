@@ -10,24 +10,24 @@ function Thermostat(){
 }
 
 Thermostat.prototype.increaseTemp = function () {
-  if (this.isMaximumTemperature()) {
-    return;
+  if (this.temp >= this.isMaximumTemperature()) {
+    return this.temp = this.isMaximumTemperature();
   }
-    this.temp += 1;
+    return this.temp += 1;
 };
 
 Thermostat.prototype.decreaseTemp = function () {
   if(this.temp === this.MIN_TEMP) {
-    return;
+    return this.temp;
   }
   return this.temp -= 1;
 };
 
 Thermostat.prototype.isMaximumTemperature = function() {
   if (this.isPowerSavingModeOn() === false) {
-    return this.temp === this.MAX_PSM_OFF;
+    return this.MAX_PSM_OFF;
   }
-    return this.temp === this.MAX_PSM_ON;
+    return this.MAX_PSM_ON;
 }
 
 Thermostat.prototype.isPowerSavingModeOn = function () {
