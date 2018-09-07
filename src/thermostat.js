@@ -40,6 +40,9 @@ Thermostat.prototype.switchPowerSavingModeOff = function() {
 
 Thermostat.prototype.switchPowerSavingModeOn = function() {
   this.powerSavingMode = true;
+  if (this.temp >= this.isMaximumTemperature()) {
+    this.temp = this.isMaximumTemperature();
+  }
 };
 
 Thermostat.prototype.reset = function() {
