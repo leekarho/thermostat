@@ -13,7 +13,7 @@ Thermostat.prototype.increaseTemp = function () {
   if (this.temp >= this.isMaximumTemperature()) {
     return this.temp = this.isMaximumTemperature();
   }
-    return this.temp += 1;
+  return this.temp += 1;
 };
 
 Thermostat.prototype.decreaseTemp = function () {
@@ -27,7 +27,7 @@ Thermostat.prototype.isMaximumTemperature = function() {
   if (this.isPowerSavingModeOn() === false) {
     return this.MAX_PSM_OFF;
   }
-    return this.MAX_PSM_ON;
+  return this.MAX_PSM_ON;
 }
 
 Thermostat.prototype.isPowerSavingModeOn = function () {
